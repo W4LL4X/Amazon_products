@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis recomendaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DE;
+    --card:#F7F4EC;
+    --ink:#211F1A;
+    --ink-soft:#5B584F;
+    --teal:#33544A;
+    --teal-dark:#233B34;
+    --gold:#A87F2E;
+    --line:#D8D0C0;
+    --radius:2px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1, h2, h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+  }
+
+  a{ color:inherit; }
+
+  /* ---------- Header ---------- */
+
+  header{
+    max-width:760px;
+    margin:0 auto;
+    padding:72px 24px 40px;
+    text-align:left;
+  }
+
+  header .kicker{
+    font-size:14px;
+    color:var(--teal);
+    margin-bottom:14px;
+  }
+
+  header h1{
+    font-size:clamp(32px, 5vw, 48px);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+
+  header p{
+    max-width:52ch;
+    color:var(--ink-soft);
+    font-size:16px;
+    margin-top:16px;
+  }
+
+  /* ---------- Category nav ---------- */
+
+  nav.categorias{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px 8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:32px;
+  }
+
+  nav.categorias a{
+    text-decoration:none;
+    font-size:14px;
+    padding:8px 16px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:var(--ink-soft);
+    transition:border-color .15s ease, color .15s ease;
+  }
+
+  nav.categorias a:hover{
+    border-color:var(--teal);
+    color:var(--teal);
+  }
+
+  /* ---------- Category sections ---------- */
+
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px 40px;
+  }
+
+  section.categoria{
+    padding-top:56px;
+    scroll-margin-top:24px;
+  }
+
+  section.categoria h2{
+    font-size:26px;
+    color:var(--ink);
+  }
+
+  section.categoria .conteo{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-top:4px;
+    margin-bottom:28px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+  }
+
+  @media (max-width:560px){
+    .grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Product card ---------- */
+
+  .producto{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .producto .imagen{
+    aspect-ratio:1/1;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(155deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color:#EDE8DE;
+    font-family:'Fraunces', serif;
+    font-size:52px;
+    overflow:hidden;
+  }
+
+  .producto .imagen img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .producto .info{
+    padding:18px 18px 20px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+
+  .producto h3{
+    font-size:17px;
+    line-height:1.3;
+  }
+
+  .producto .nota{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-top:8px;
+    flex:1;
+  }
+
+  .producto .fila-inferior{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:16px;
+  }
+
+  .producto .precio{
+    font-size:15px;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .producto .boton{
+    text-decoration:none;
+    font-size:14px;
+    color:var(--paper);
+    background:var(--teal);
+    padding:9px 16px;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:background .15s ease;
+  }
+
+  .producto .boton:hover{
+    background:var(--teal-dark);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    max-width:760px;
+    margin:0 auto;
+    padding:40px 24px 72px;
+    border-top:1px solid var(--line);
+    margin-top:24px;
+  }
+
+  footer p{
+    font-size:13px;
+    color:var(--ink-soft);
+    max-width:60ch;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Desde Pinterest</div>
+  <h1>Cosas que me encantan</h1>
+  <p>Una selección de productos que uso y recomiendo de verdad, organizada por categoría. Toca cualquier producto para verlo en Amazon.</p>
+</header>
+
+<!--
+  ============================================================
+  NAVEGACIÓN POR CATEGORÍAS
+  Cada enlace debe apuntar al id de la sección correspondiente
+  (ej. href="#cocina" apunta a <section id="cocina">)
+  ============================================================
+-->
+<nav class="categorias">
+  <a href="#cocina">Cocina</a>
+  <a href="#tecnologia">Tecnología</a>
+  <a href="#hogar">Hogar</a>
+</nav>
+
+<main>
+
+  <!--
+    ============================================================
+    CADA SECCIÓN = UNA CATEGORÍA
+    Para añadir una categoría nueva: copia un <section> entero,
+    cambia el id, el título y los productos de dentro.
+    Para añadir un producto: copia un <article class="producto">
+    entero dentro de la sección y edita sus datos.
+    ============================================================
+  -->
+
+  <section class="categoria" id="cocina">
+    <h2>Cocina</h2>
+    <p class="conteo">3 productos</p>
+    <div class="grid">
+
+      <article class="producto">
+        <div class="imagen">C</div>
+        <!-- Sustituye el div de arriba por: <img src="URL_DE_LA_IMAGEN" alt="..."> -->
+        <div class="info">
+          <h3>Robot de cocina compacto</h3>
+          <p class="nota">El que uso cada mañana para los batidos, ocupa poquísimo.</p>
+          <div class="fila-inferior">
+            <span class="precio">desde 39,99 €</span>
+            <a class="boton" href="TU_ENLACE_DE_AFILIADO_AQUI" target="_blank" rel="noopener sponsored">Ver en Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="producto">
+        <div class="imagen">S</div>
+        <div class="info">
+          <h3>Set de tablas de cortar</h3>
+          <p class="nota">Antideslizantes y con código de colores, muy prácticas.</p>
+          <div class="fila-inferior">
+            <span class="precio">desde 22,50 €</span>
+            <a class="boton" href="TU_ENLACE_DE_AFILIADO_AQUI" target="_blank" rel="noopener sponsored">Ver en Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="producto">
+        <div class="imagen">O</div>
+        <div class="info">
+          <h3>Organizador de especias</h3>
+          <p class="nota">Giratorio, cabe hasta en la alacena más pequeña.</p>
+          <div class="fila-inferior">
+            <span class="precio">desde 18,90 €</span>
+            <a class="boton" href="TU_ENLACE_DE_AFILIADO_AQUI" target="_blank" rel="noopener sponsored">Ver en Amazon</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="categoria" id="tecnologia">
+    <h2>Tecnología</h2>
+    <p class="conteo">2 productos</p>
+    <div class="grid">
+
+      <article class="producto">
+        <div class="imagen">A</div>
+        <div class="info">
+          <h3>Altavoz portátil</h3>
+          <p class="nota">Sonido sorprendente para lo pequeño que es, batería larga.</p>
+          <div class="fila-inferior">
+            <span class="precio">desde 34,99 €</span>
+            <a class="boton" href="TU_ENLACE_DE_AFILIADO_AQUI" target="_blank" rel="noopener sponsored">Ver en Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="producto">
+        <div class="imagen">C</div>
+        <div class="info">
+          <h3>Cargador multipuerto</h3>
+          <p class="nota">Carga tres dispositivos a la vez, ideal para viajar.</p>
+          <div class="fila-inferior">
+            <span class="precio">desde 15,99 €</span>
+            <a class="boton" href="TU_ENLACE_DE_AFILIADO_AQUI" target="_blank" rel="noopener sponsored">Ver en Amazon</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="categoria" id="hogar">
+    <h2>Hogar</h2>
+    <p class="conteo">2 productos</p>
+    <div class="grid">
+
+      <article class="producto">
+        <div class="imagen">V</div>
+        <div class="info">
+          <h3>Set de velas aromáticas</h3>
+          <p class="nota">Tres aromas suaves, perfectas para regalar o para casa.</p>
+          <div class="fila-inferior">
+            <span class="precio">desde 16,90 €</span>
+            <a class="boton" href="TU_ENLACE_DE_AFILIADO_AQUI" target="_blank" rel="noopener sponsored">Ver en Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="producto">
+        <div class="imagen">M</div>
+        <div class="info">
+          <h3>Manta de punto grueso</h3>
+          <p class="nota">Súper suave, la que sale en la mitad de mis fotos de otoño.</p>
+          <div class="fila-inferior">
+            <span class="precio">desde 27,50 €</span>
+            <a class="boton" href="TU_ENLACE_DE_AFILIADO_AQUI" target="_blank" rel="noopener sponsored">Ver en Amazon</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Como Afiliado de Amazon, obtengo ingresos por las compras que cumplen los requisitos aplicables. Esto no supone ningún coste adicional para ti.</p>
+</footer>
+
+</body>
+</html>
